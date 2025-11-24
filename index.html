@@ -61,7 +61,7 @@
 
     body.no-scroll {
       overflow: hidden;
-      touch-action: none;
+      /* touch-action: none;  핀치줌 허용 위해 제거 */
     }
 
     img {
@@ -412,10 +412,10 @@
     .letter-photo-wrap img.letter {
       position: absolute;
       left: 50%;
-      top: -70px;
+      top: -80px;              /* 위로 살짝 올림 (-70 → -80) */
       transform: translateX(-50%);
-      width: 82%;
-      max-width: 360px;
+      width: 70%;              /* 82%의 약 85%로 축소 */
+      max-width: 306px;        /* 360px의 약 85% */
     }
 
     .letter-text {
@@ -450,10 +450,10 @@
     .gallery-main-wrap img.gallery-letter {
       position: absolute;
       left: 50%;
-      top: -60px;
+      top: -70px;            /* 위로 살짝 올림 (-60 → -70) */
       transform: translateX(-50%);
-      width: 80%;
-      max-width: 340px;
+      width: 68%;            /* 80%의 약 85%로 축소 */
+      max-width: 289px;      /* 340px의 약 85% */
     }
 
     .photo-grid {
@@ -938,9 +938,9 @@
   <section class="postcard-section section-fade">
     <img class="postcard-image" src="images/postcard.png" alt="엽서 이미지">
     <div class="postcard-caption">
-      소중한 분들을 모시고<br>
-      저희 두 사람이 새로운 시작을 맞이하려 합니다.<br>
-      귀한 걸음으로 축복해 주시면 감사하겠습니다.
+      둘이서 잘 지내왔고,<br>
+      앞으로도 잘 지내려 합니다.<br>
+      소중한 분들을 모시고 그 시작을 함께 지켜봐 주시면 좋겠습니다.
     </div>
   </section>
 
