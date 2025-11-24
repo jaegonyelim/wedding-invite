@@ -343,7 +343,7 @@
 
     .story-heading {
       font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "맑은 고딕", sans-serif;
-      font-size: 12px; /* 아주 살짝 더 작게 조정 (13 → 12) */
+      font-size: 12px; /* 살짝 작게 */
       font-weight: 700;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -370,7 +370,7 @@
     .story-label-top {
       position: absolute;
       left: 10px;
-      top: 10px;
+      top: 6px;              /* 사진 상단에 조금 더 붙이기 (10 → 6) */
       font-size: 13px;
       color: #ffffff;
       white-space: pre-line;
@@ -379,6 +379,7 @@
       background: none;
       padding: 0;
       border-radius: 0;
+      line-height: 1.2;      /* 두 줄 사이 간격 살짝 좁게 */
     }
 
     /* 부모 이름: 기존 크기 유지, 더 굵게 */
@@ -424,7 +425,7 @@
     .letter-photo-wrap img.letter {
       position: absolute;
       left: 50%;
-      top: -110px;              /* 살짝 더 위로 올림 (-100 → -110) */
+      top: -110px;              /* 이전에 올려 둔 값 유지 */
       transform: translateX(-50%);
       width: 70%;
       max-width: 306px;
