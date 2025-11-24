@@ -311,6 +311,7 @@
     .names-en {
       font-size: 15px;
       color: #ffffff;
+      font-weight: 600; /* 두께 살짝 증가 */
     }
 
     /* ===== 5. 메인 사진 1 (hero-main2) ===== */
@@ -341,15 +342,16 @@
       margin: 0 auto 72px;
     }
 
-    /* 여기만 Cormorant로 변경 */
+    /* Cormorant + 살짝 더 진하게 보이도록 text-shadow 추가 */
     .story-heading {
       font-family: "Cormorant Garamond", "Times New Roman", serif;
-      font-size: 12px; /* 아주 살짝 더 작게 조정 (13 → 12) */
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       margin-bottom: 20px;
       text-align: center;
+      text-shadow: 0 0 0.4px rgba(0,0,0,0.55);
     }
 
     .story-inner {
@@ -382,13 +384,11 @@
       border-radius: 0;
     }
 
-    /* 부모 이름: 기존 크기 유지, 더 굵게 */
     .story-label-top .label-parent {
       font-size: 13px;
       font-weight: 700;
     }
 
-    /* 아들/딸 이름: 폰트 크기 살짝 줄이고, 부모보다는 약간 가볍게 */
     .story-label-top .label-child {
       font-size: 12px;
       font-weight: 600;
@@ -500,7 +500,7 @@
       align-items: center;
       z-index: 1200;
       overscroll-behavior: contain;
-      touch-action: auto; /* 기본 제스처 허용 (핀치줌 포함) */
+      touch-action: auto;
     }
     .lightbox.visible {
       display: flex;
@@ -647,13 +647,30 @@
       font-weight: 700;
     }
 
-    /* D-day 표시 추가 */
-    .calendar-dday {
-      margin-top: 24px;
+    /* D-day 영역 리디자인 */
+    .calendar-dday-wrap {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(0,0,0,0.18);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .calendar-dday-label {
       font-family: "Cormorant Garamond", "Times New Roman", serif;
-      font-size: 16px;
-      letter-spacing: 0.08em;
-      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.78;
+    }
+
+    .calendar-dday {
+      font-family: "Cormorant Garamond", "Times New Roman", serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
     }
 
     /* ===== 11. 오시는 길 ===== */
@@ -1042,7 +1059,6 @@
     </div>
 
     <div class="photo-grid">
-      <!-- 1~9 : grid-1 ~ grid-9 -->
       <div class="photo-grid-item"><img src="images/grid-1.jpg" alt="사진 1"  class="gallery-click"></div>
       <div class="photo-grid-item"><img src="images/grid-2.jpg" alt="사진 2"  class="gallery-click"></div>
       <div class="photo-grid-item"><img src="images/grid-3.jpg" alt="사진 3"  class="gallery-click"></div>
@@ -1053,7 +1069,6 @@
       <div class="photo-grid-item"><img src="images/grid-8.jpg" alt="사진 8"  class="gallery-click"></div>
       <div class="photo-grid-item"><img src="images/grid-9.jpg" alt="사진 9"  class="gallery-click"></div>
 
-      <!-- 10~15 : 다시 grid-1 ~ grid-6 반복 -->
       <div class="photo-grid-item"><img src="images/grid-1.jpg" alt="사진 10" class="gallery-click"></div>
       <div class="photo-grid-item"><img src="images/grid-2.jpg" alt="사진 11" class="gallery-click"></div>
       <div class="photo-grid-item"><img src="images/grid-3.jpg" alt="사진 12" class="gallery-click"></div>
@@ -1123,8 +1138,11 @@
       <div class="calendar-day">28</div>
     </div>
 
-    <!-- D-day 표시 영역 -->
-    <div class="calendar-dday" id="calendar-dday"></div>
+    <!-- D-day 표시 영역 (리디자인) -->
+    <div class="calendar-dday-wrap">
+      <div class="calendar-dday-label">DAYS TO WEDDING</div>
+      <div class="calendar-dday" id="calendar-dday"></div>
+    </div>
   </section>
 
   <!-- 11. 오시는 길 -->
@@ -1500,7 +1518,6 @@
     if (!lightboxTrack) return;
     if (!e.touches || e.touches.length === 0) return;
 
-    // 2손가락 이상 → 핀치줌 제스처로 간주, 슬라이드 제스처 비활성화
     if (e.touches.length > 1) {
       isZoomGesture = true;
       isDragging = false;
@@ -1509,7 +1526,6 @@
       return;
     }
 
-    // 1손가락 스와이프 시작
     isZoomGesture = false;
     const touch = e.touches[0];
     isDragging = true;
@@ -1526,7 +1542,6 @@
     if (!lightboxTrack) return;
     if (!e.touches || e.touches.length === 0) return;
 
-    // 이동 중에 멀티터치가 되면 줌 제스처로 전환
     if (e.touches.length > 1) {
       isZoomGesture = true;
       isDragging = false;
@@ -1550,7 +1565,6 @@
   function onLightboxTouchEnd(e) {
     const remainingTouches = e.touches ? e.touches.length : 0;
 
-    // 핀치줌 제스처 중이었던 경우: 스와이프/닫기 처리 없이 상태만 정리
     if (isZoomGesture) {
       if (remainingTouches === 0) {
         isZoomGesture = false;
@@ -1576,7 +1590,6 @@
 
     const lightbox = document.getElementById("lightbox");
 
-    // 아래로 충분히 스와이프 → 라이트박스 닫기
     if (absDy > absDx && absDy > SWIPE_VERTICAL_THRESHOLD && dy > 0) {
       if (lightbox) lightbox.classList.remove("visible");
       unlockBodyScroll();
@@ -1585,7 +1598,6 @@
       return;
     }
 
-    // 좌우 스와이프 → 이전/다음 사진
     if (absDx > SWIPE_THRESHOLD) {
       if (dx < 0) {
         currentIndex = (currentIndex + 1) % galleryImages.length;
@@ -1601,7 +1613,7 @@
     lastDy = 0;
   }
 
-  /* D-day 계산 함수 */
+  /* D-day 계산 함수: 영어만, D-숫자 형식 */
   function updateDDay() {
     const el = document.getElementById("calendar-dday");
     if (!el) return;
@@ -1614,11 +1626,11 @@
     const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
 
     if (diffDays > 0) {
-      el.textContent = `결혼식까지 D-${diffDays}`;
+      el.textContent = `D-${diffDays}`;
     } else if (diffDays === 0) {
-      el.textContent = "오늘은 결혼식 당일입니다. (D-DAY)";
+      el.textContent = "D-DAY";
     } else {
-      el.textContent = `결혼식이 지나갔습니다. (D+${Math.abs(diffDays)})`;
+      el.textContent = `D+${Math.abs(diffDays)}`;
     }
   }
 
@@ -1673,7 +1685,6 @@
       }
     });
 
-    /* D-day 업데이트 */
     updateDDay();
   });
 
