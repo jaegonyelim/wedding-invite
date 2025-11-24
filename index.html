@@ -62,7 +62,6 @@
 
     body.no-scroll {
       overflow: hidden;
-      /* touch-action: none;  핀치줌 허용 위해 제거 */
     }
 
     img {
@@ -413,10 +412,10 @@
     .letter-photo-wrap img.letter {
       position: absolute;
       left: 50%;
-      top: -90px;              /* 조금 더 위로 올림 (-80 → -90) */
+      top: -100px;              /* 조금 더 위로 올림 (-90 → -100) */
       transform: translateX(-50%);
-      width: 70%;              /* 82%의 약 85%로 축소된 상태 유지 */
-      max-width: 306px;        /* 360px의 약 85% */
+      width: 70%;              
+      max-width: 306px;        
     }
 
     .letter-text {
@@ -451,10 +450,10 @@
     .gallery-main-wrap img.gallery-letter {
       position: absolute;
       left: 50%;
-      top: -80px;            /* 조금 더 위로 올림 (-70 → -80) */
+      top: -80px;
       transform: translateX(-50%);
-      width: 68%;            /* 80%의 약 85%로 축소된 상태 유지 */
-      max-width: 289px;      /* 340px의 약 85% */
+      width: 68%;
+      max-width: 289px;
     }
 
     .photo-grid {
@@ -488,7 +487,7 @@
       align-items: center;
       z-index: 1200;
       overscroll-behavior: contain;
-      touch-action: pan-x pan-y;
+      touch-action: auto; /* 기본 제스처 허용 (핀치줌 포함) */
     }
     .lightbox.visible {
       display: flex;
@@ -1470,12 +1469,17 @@
     if (!lightboxTrack) return;
     if (!e.touches || e.touches.length === 0) return;
 
-    // 멀티 터치(핀치줌) 또는 줌 제스처 상태에서는 스와이프 비활성화
-    if (e.touches.length > 1 || isZoomGesture) {
+    // 2손가락 이상 → 핀치줌 제스처로 간주, 슬라이드 제스처 비활성화
+    if (e.touches.length > 1) {
+      isZoomGesture = true;
       isDragging = false;
+      lastDx = 0;
+      lastDy = 0;
       return;
     }
 
+    // 1손가락 스와이프 시작
+    isZoomGesture = false;
     const touch = e.touches[0];
     isDragging = true;
     startX = touch.clientX;
@@ -1488,8 +1492,19 @@
   }
 
   function onLightboxTouchMove(e) {
-    if (!isDragging || !lightboxTrack || isZoomGesture) return;
+    if (!lightboxTrack) return;
     if (!e.touches || e.touches.length === 0) return;
+
+    // 이동 중에 멀티터치가 되면 줌 제스처로 전환
+    if (e.touches.length > 1) {
+      isZoomGesture = true;
+      isDragging = false;
+      lastDx = 0;
+      lastDy = 0;
+      return;
+    }
+
+    if (!isDragging || isZoomGesture) return;
 
     const touch = e.touches[0];
     const dx = touch.clientX - startX;
@@ -1501,12 +1516,21 @@
     lightboxTrack.style.transform = `translateX(${baseOffset + dx}px)`;
   }
 
-  function onLightboxTouchEnd() {
-    if (!isDragging) return;
+  function onLightboxTouchEnd(e) {
+    const remainingTouches = e.touches ? e.touches.length : 0;
 
-    // 핀치줌 상태에서는 스와이프/닫기 제스처 처리하지 않음
+    // 핀치줌 제스처 중이었던 경우: 스와이프/닫기 처리 없이 상태만 정리
     if (isZoomGesture) {
+      if (remainingTouches === 0) {
+        isZoomGesture = false;
+      }
       isDragging = false;
+      lastDx = 0;
+      lastDy = 0;
+      return;
+    }
+
+    if (!isDragging) {
       lastDx = 0;
       lastDy = 0;
       return;
@@ -1521,15 +1545,16 @@
 
     const lightbox = document.getElementById("lightbox");
 
+    // 아래로 충분히 스와이프 → 라이트박스 닫기
     if (absDy > absDx && absDy > SWIPE_VERTICAL_THRESHOLD && dy > 0) {
       if (lightbox) lightbox.classList.remove("visible");
-      isZoomGesture = false;
       unlockBodyScroll();
       lastDx = 0;
       lastDy = 0;
       return;
     }
 
+    // 좌우 스와이프 → 이전/다음 사진
     if (absDx > SWIPE_THRESHOLD) {
       if (dx < 0) {
         currentIndex = (currentIndex + 1) % galleryImages.length;
@@ -1543,14 +1568,6 @@
 
     lastDx = 0;
     lastDy = 0;
-  }
-
-  function onLightboxGestureStart(e) {
-    isZoomGesture = true;
-  }
-
-  function onLightboxGestureEnd(e) {
-    // 줌 상태 유지, 스와이프는 isZoomGesture로 막힘
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -1594,10 +1611,6 @@
       lightboxEl.addEventListener("touchstart", onLightboxTouchStart, { passive: true });
       lightboxEl.addEventListener("touchmove", onLightboxTouchMove, { passive: true });
       lightboxEl.addEventListener("touchend", onLightboxTouchEnd, { passive: true });
-
-      // iOS Safari용 핀치 제스처 감지
-      lightboxEl.addEventListener("gesturestart", onLightboxGestureStart);
-      lightboxEl.addEventListener("gestureend", onLightboxGestureEnd);
     }
 
     window.addEventListener("resize", () => {
