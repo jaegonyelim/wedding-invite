@@ -343,7 +343,7 @@
 
     .story-heading {
       font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "맑은 고딕", sans-serif;
-      font-size: 13px;
+      font-size: 12px; /* 아주 살짝 더 작게 조정 (13 → 12) */
       font-weight: 700;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -381,6 +381,18 @@
       border-radius: 0;
     }
 
+    /* 부모 이름: 기존 크기 유지, 더 굵게 */
+    .story-label-top .label-parent {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* 아들/딸 이름: 폰트 크기 살짝 줄이고, 부모보다는 약간 가볍게 */
+    .story-label-top .label-child {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
     .story-photo-wrap img.letter {
       position: absolute;
       right: 10px;
@@ -412,10 +424,10 @@
     .letter-photo-wrap img.letter {
       position: absolute;
       left: 50%;
-      top: -100px;              /* 조금 더 위로 올림 (-90 → -100) */
+      top: -110px;              /* 살짝 더 위로 올림 (-100 → -110) */
       transform: translateX(-50%);
-      width: 70%;              
-      max-width: 306px;        
+      width: 70%;
+      max-width: 306px;
     }
 
     .letter-text {
@@ -974,7 +986,10 @@
       <div class="story-inner">
         <div class="story-photo-wrap">
           <img class="main" src="images/groom-childhood.jpg" alt="신랑 어린 시절">
-          <div class="story-label-top">김병길 &amp; 김향숙의<br>아들 재곤</div>
+          <div class="story-label-top">
+            <span class="label-parent">김병길 &amp; 김향숙의</span><br>
+            <span class="label-child">아들 재곤</span>
+          </div>
           <img class="letter" src="images/parents-groom-letter.png" alt="신랑 부모님 손글씨" onerror="this.style.display='none';">
         </div>
       </div>
@@ -986,7 +1001,10 @@
       <div class="story-inner">
         <div class="story-photo-wrap">
           <img class="main" src="images/bride-childhood.jpg" alt="신부 어린 시절">
-          <div class="story-label-top">하재웅 &amp; 김지영의<br>딸 예림</div>
+          <div class="story-label-top">
+            <span class="label-parent">하재웅 &amp; 김지영의</span><br>
+            <span class="label-child">딸 예림</span>
+          </div>
           <img class="letter" src="images/parents-bride-letter.png" alt="신부 부모님 손글씨" onerror="this.style.display='none';">
         </div>
       </div>
