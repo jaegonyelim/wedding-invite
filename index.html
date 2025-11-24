@@ -341,9 +341,10 @@
       margin: 0 auto 72px;
     }
 
+    /* 여기만 Cormorant로 변경 */
     .story-heading {
-      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "맑은 고딕", sans-serif;
-      font-size: 12px; /* 살짝 작게 */
+      font-family: "Cormorant Garamond", "Times New Roman", serif;
+      font-size: 12px; /* 아주 살짝 더 작게 조정 (13 → 12) */
       font-weight: 700;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -370,7 +371,7 @@
     .story-label-top {
       position: absolute;
       left: 10px;
-      top: 6px;              /* 사진 상단에 조금 더 붙이기 (10 → 6) */
+      top: 10px;
       font-size: 13px;
       color: #ffffff;
       white-space: pre-line;
@@ -379,7 +380,6 @@
       background: none;
       padding: 0;
       border-radius: 0;
-      line-height: 1.2;      /* 두 줄 사이 간격 살짝 좁게 */
     }
 
     /* 부모 이름: 기존 크기 유지, 더 굵게 */
@@ -425,7 +425,7 @@
     .letter-photo-wrap img.letter {
       position: absolute;
       left: 50%;
-      top: -110px;              /* 이전에 올려 둔 값 유지 */
+      top: -110px;
       transform: translateX(-50%);
       width: 70%;
       max-width: 306px;
@@ -645,6 +645,15 @@
       background: #000000;
       color: var(--accent);
       font-weight: 700;
+    }
+
+    /* D-day 표시 추가 */
+    .calendar-dday {
+      margin-top: 24px;
+      font-family: "Cormorant Garamond", "Times New Roman", serif;
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      font-weight: 600;
     }
 
     /* ===== 11. 오시는 길 ===== */
@@ -1113,6 +1122,9 @@
       <div class="calendar-day">27</div>
       <div class="calendar-day">28</div>
     </div>
+
+    <!-- D-day 표시 영역 -->
+    <div class="calendar-dday" id="calendar-dday"></div>
   </section>
 
   <!-- 11. 오시는 길 -->
@@ -1589,6 +1601,27 @@
     lastDy = 0;
   }
 
+  /* D-day 계산 함수 */
+  function updateDDay() {
+    const el = document.getElementById("calendar-dday");
+    if (!el) return;
+
+    const today = new Date();
+    const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const eventDate = new Date(2026, 1, 22); // 2026-02-22 (월 0 기반: 1 = 2월)
+
+    const diffMs = eventDate.getTime() - todayDate.getTime();
+    const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+
+    if (diffDays > 0) {
+      el.textContent = `결혼식까지 D-${diffDays}`;
+    } else if (diffDays === 0) {
+      el.textContent = "오늘은 결혼식 당일입니다. (D-DAY)";
+    } else {
+      el.textContent = `결혼식이 지나갔습니다. (D+${Math.abs(diffDays)})`;
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     const audio = document.getElementById("bgm");
     if (audio) {
@@ -1639,6 +1672,9 @@
         updateTrackPosition(false);
       }
     });
+
+    /* D-day 업데이트 */
+    updateDDay();
   });
 
   function copyText(text) {
