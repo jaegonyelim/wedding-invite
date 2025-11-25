@@ -353,9 +353,18 @@
       font-weight: 700;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 10px; /* 라벨 텍스트와 간격 조정 */
       text-align: center;
       text-shadow: 0 0 0.4px rgba(0,0,0,0.55);
+    }
+
+    .story-subtitle {
+      text-align: center;
+      margin-bottom: 22px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #000000;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "맑은 고딕", system-ui, sans-serif;
     }
 
     .story-inner {
@@ -374,6 +383,7 @@
       border-radius: 0;
     }
 
+    /* 기존 오버레이 라벨 스타일은 더 이상 사용하지 않지만 남겨둠 */
     .story-label-top {
       position: absolute;
       left: 10px;
@@ -1015,13 +1025,10 @@
     <!-- Groom -->
     <div class="story-block">
       <div class="story-heading">Groom's Childhood</div>
+      <div class="story-subtitle">김병길 &amp; 김향숙의 아들 재곤</div>
       <div class="story-inner">
         <div class="story-photo-wrap">
           <img class="main" src="images/groom-childhood.jpg" alt="신랑 어린 시절">
-          <div class="story-label-top">
-            <span class="label-parent">김병길 &amp; 김향숙의</span><br>
-            <span class="label-child">아들 재곤</span>
-          </div>
           <img class="letter" src="images/parents-groom-letter.png" alt="신랑 부모님 손글씨" onerror="this.style.display='none';">
         </div>
       </div>
@@ -1030,13 +1037,10 @@
     <!-- Bride -->
     <div class="story-block">
       <div class="story-heading">Bride's Childhood</div>
+      <div class="story-subtitle">하재웅 &amp; 김지영의 딸 예림</div>
       <div class="story-inner">
         <div class="story-photo-wrap">
           <img class="main" src="images/bride-childhood.jpg" alt="신부 어린 시절">
-          <div class="story-label-top">
-            <span class="label-parent">하재웅 &amp; 김지영의</span><br>
-            <span class="label-child">딸 예림</span>
-          </div>
           <img class="letter" src="images/parents-bride-letter.png" alt="신부 부모님 손글씨" onerror="this.style.display='none';">
         </div>
       </div>
@@ -1064,22 +1068,22 @@
     </div>
 
     <div class="photo-grid">
-      <div class="photo-grid-item"><img src="images/grid-1.jpg" alt="사진 1"  class="gallery-click"></div>
-      <div class="photo-grid-item"><img src="images/grid-2.jpg" alt="사진 2"  class="gallery-click"></div>
-      <div class="photo-grid-item"><img src="images/grid-3.jpg" alt="사진 3"  class="gallery-click"></div>
-      <div class="photo-grid-item"><img src="images/grid-4.jpg" alt="사진 4"  class="gallery-click"></div>
-      <div class="photo-grid-item"><img src="images/grid-5.jpg" alt="사진 5"  class="gallery-click"></div>
-      <div class="photo-grid-item"><img src="images/grid-6.jpg" alt="사진 6"  class="gallery-click"></div>
-      <div class="photo-grid-item"><img src="images/grid-7.jpg" alt="사진 7"  class="gallery-click"></div>
-      <div class="photo-grid-item"><img src="images/grid-8.jpg" alt="사진 8"  class="gallery-click"></div>
-      <div class="photo-grid-item"><img src="images/grid-9.jpg" alt="사진 9"  class="gallery-click"></div>
+      <div class="photo-grid-item"><img src="images/grid-1.jpg" alt="사진 1" class="gallery-click"></div>
+      <div class="photo-grid-item"><img src="images/grid-2.jpg" alt="사진 2" class="gallery-click"></div>
+      <div class="photo-grid-item"><img src="images/grid-3.jpg" alt="사진 3" class="gallery-click"></div>
+      <div class="photo-grid-item"><img src="images/grid-4.jpg" alt="사진 4" class="gallery-click"></div>
+      <div class="photo-grid-item"><img src="images/grid-5.jpg" alt="사진 5" class="gallery-click"></div>
+      <div class="photo-grid-item"><img src="images/grid-6.jpg" alt="사진 6" class="gallery-click"></div>
+      <div class="photo-grid-item"><img src="images/grid-7.jpg" alt="사진 7" class="gallery-click"></div>
+      <div class="photo-grid-item"><img src="images/grid-8.jpg" alt="사진 8" class="gallery-click"></div>
+      <div class="photo-grid-item"><img src="images/grid-9.jpg" alt="사진 9" class="gallery-click"></div>
 
-      <div class="photo-grid-item"><img src="images/grid-1.jpg" alt="사진 10" class="gallery-click"></div>
-      <div class="photo-grid-item"><img src="images/grid-2.jpg" alt="사진 11" class="gallery-click"></div>
-      <div class="photo-grid-item"><img src="images/grid-3.jpg" alt="사진 12" class="gallery-click"></div>
-      <div class="photo-grid-item"><img src="images/grid-4.jpg" alt="사진 13" class="gallery-click"></div>
-      <div class="photo-grid-item"><img src="images/grid-5.jpg" alt="사진 14" class="gallery-click"></div>
-      <div class="photo-grid-item"><img src="images/grid-6.jpg" alt="사진 15" class="gallery-click"></div>
+      <div class="photo-grid-item"><img src="images/grid-10.jpg" alt="사진 10" class="gallery-click"></div>
+      <div class="photo-grid-item"><img src="images/grid-11.jpg" alt="사진 11" class="gallery-click"></div>
+      <div class="photo-grid-item"><img src="images/grid-12.jpg" alt="사진 12" class="gallery-click"></div>
+      <div class="photo-grid-item"><img src="images/grid-13.jpg" alt="사진 13" class="gallery-click"></div>
+      <div class="photo-grid-item"><img src="images/grid-14.jpg" alt="사진 14" class="gallery-click"></div>
+      <div class="photo-grid-item"><img src="images/grid-15.jpg" alt="사진 15" class="gallery-click"></div>
     </div>
   </section>
 
