@@ -346,29 +346,28 @@
       margin-bottom: 0; /* 마지막 블럭 밑 간격은 story-section padding-bottom으로만 조절 */
     }
 
-   /* Cormorant 제목: 더 크고, 제목 느낌 나게 */
-.story-heading {
-  font-family: "Cormorant Garamond", "Times New Roman", serif;
-  font-size: 15px;               /* 12px → 15px로 키움 */
-  font-weight: 700;
-  letter-spacing: 0.18em;        /* 자간 살짝 더 넓게 */
-  text-transform: uppercase;
-  margin-bottom: 12px;           /* 아래 여백 조금 늘림 */
-  text-align: center;
-  text-shadow: 0 0 0.4px rgba(0,0,0,0.55);
-}
+    /* Cormorant 제목: 더 크고, 제목 느낌 나게 */
+    .story-heading {
+      font-family: "Cormorant Garamond", "Times New Roman", serif;
+      font-size: 15px;               /* 12px → 15px로 키움 */
+      font-weight: 700;
+      letter-spacing: 0.18em;        /* 자간 살짝 더 넓게 */
+      text-transform: uppercase;
+      margin-bottom: 12px;           /* 아래 여백 조금 늘림 */
+      text-align: center;
+      text-shadow: 0 0 0.4px rgba(0,0,0,0.55);
+    }
 
-/* 부모님·자녀 한글 라벨: 살짝 더 작고 여백 넉넉하게 */
-.story-subtitle {
-  text-align: center;
-  margin-bottom: 26px;           /* 사진과 사이 여백 조금 더 */
-  font-size: 12px;               /* 13px → 12px로 살짝 줄여서 대비 줌 */
-  line-height: 1.7;
-  color: #000000;
-  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
-               "Noto Sans KR", "맑은 고딕", system-ui, sans-serif;
-}
-
+    /* 부모님·자녀 한글 라벨: 살짝 더 작고 여백 넉넉하게 */
+    .story-subtitle {
+      text-align: center;
+      margin-bottom: 26px;           /* 사진과 사이 여백 조금 더 */
+      font-size: 12px;               /* 13px → 12px로 살짝 줄여서 대비 줌 */
+      line-height: 1.7;
+      color: #000000;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+                   "Noto Sans KR", "맑은 고딕", system-ui, sans-serif;
+    }
 
     .story-inner {
       background: transparent;
@@ -1207,47 +1206,73 @@
       <span class="pill-title">마음 전하실 곳</span>
     </div>
 
+    <!-- 신랑측 계좌번호 -->
     <div class="account-group" style="margin-top: 20px;">
       <div class="account-group-title">신랑측 계좌번호</div>
 
+      <!-- 신랑 -->
       <div class="account-item">
         <div class="account-label-left">🤵</div>
         <div class="account-text">
           <div>신한은행 000-000-000000</div>
-          <div class="account-name">예금주 김재곤</div>
+          <div class="account-name">예금주 김재곤 (신랑)</div>
         </div>
         <button type="button" class="btn-copy" onclick="copyText('신한은행 000-000-000000')">계좌 복사하기</button>
       </div>
 
+      <!-- 신랑 아버지 -->
       <div class="account-item">
-        <div class="account-label-left">👨‍👩‍👦</div>
+        <div class="account-label-left">👨</div>
         <div class="account-text">
           <div>국민은행 000000-00-000000</div>
-          <div class="account-name">예금주 김병길</div>
+          <div class="account-name">예금주 김병길 (신랑 아버지)</div>
         </div>
         <button type="button" class="btn-copy" onclick="copyText('국민은행 000000-00-000000')">계좌 복사하기</button>
       </div>
+
+      <!-- 신랑 어머니 -->
+      <div class="account-item">
+        <div class="account-label-left">👩</div>
+        <div class="account-text">
+          <div>국민은행 111111-11-111111</div>
+          <div class="account-name">예금주 김향숙 (신랑 어머니)</div>
+        </div>
+        <button type="button" class="btn-copy" onclick="copyText('국민은행 111111-11-111111')">계좌 복사하기</button>
+      </div>
     </div>
 
+    <!-- 신부측 계좌번호 -->
     <div class="account-group" style="margin-top: 24px;">
       <div class="account-group-title">신부측 계좌번호</div>
 
+      <!-- 신부 -->
       <div class="account-item">
         <div class="account-label-left">👰</div>
         <div class="account-text">
           <div>카카오뱅크 0000-00-000000</div>
-          <div class="account-name">예금주 하예림</div>
+          <div class="account-name">예금주 하예림 (신부)</div>
         </div>
         <button type="button" class="btn-copy" onclick="copyText('카카오뱅크 0000-00-000000')">계좌 복사하기</button>
       </div>
 
+      <!-- 신부 아버지 -->
       <div class="account-item">
-        <div class="account-label-left">👨‍👩‍👧</div>
+        <div class="account-label-left">👨</div>
         <div class="account-text">
           <div>농협 000-0000-0000-00</div>
-          <div class="account-name">예금주 하재웅</div>
+          <div class="account-name">예금주 하재웅 (신부 아버지)</div>
         </div>
         <button type="button" class="btn-copy" onclick="copyText('농협 000-0000-0000-00')">계좌 복사하기</button>
+      </div>
+
+      <!-- 신부 어머니 -->
+      <div class="account-item">
+        <div class="account-label-left">👩</div>
+        <div class="account-text">
+          <div>농협 111-1111-1111-11</div>
+          <div class="account-name">예금주 김지영 (신부 어머니)</div>
+        </div>
+        <button type="button" class="btn-copy" onclick="copyText('농협 111-1111-1111-11')">계좌 복사하기</button>
       </div>
     </div>
 
